@@ -6,6 +6,7 @@ fn main() {
 
     example01();
     example02();
+    example03();
 }
 
 fn mul(x: i32, y: i32) -> i32 {
@@ -24,4 +25,12 @@ fn example02() {
 
     let s: &[u32] = &arr[1..3];
     println!("{:?}", s);
+}
+
+fn example03() {
+    let a: &str = "  Hello";
+    let mut b: String = a.to_string();
+    b += ", world!  ";
+    let c: &str = b.trim();
+    println!("{c}");
 }

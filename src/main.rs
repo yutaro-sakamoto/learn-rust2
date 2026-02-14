@@ -7,6 +7,7 @@ fn main() {
     example01();
     example02();
     example03();
+    example04();
 }
 
 fn mul(x: i32, y: i32) -> i32 {
@@ -33,4 +34,21 @@ fn example03() {
     b += ", world!  ";
     let c: &str = b.trim();
     println!("{c}");
+}
+
+fn do_it(f: fn(u32, u32) -> u32, a: u32, b: u32) {
+    println!("{}", f(a, b));
+}
+
+fn add(a: u32, b: u32) -> u32 {
+    a + b
+}
+
+fn mul2(a: u32, b: u32) -> u32 {
+    a * b
+}
+
+fn example04() {
+    do_it(add, 10, 2);
+    do_it(mul2, 10, 2);
 }

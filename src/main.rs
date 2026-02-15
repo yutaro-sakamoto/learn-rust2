@@ -75,4 +75,24 @@ fn example05() {
         rpm: 7200,
     };
     let ssd = Storage::SSD(512);
+    struct PCSpec {
+        cpus: u16,
+        memory: u32,
+        storage: Storage,
+    }
+
+    let spec = PCSpec {
+        cpus: 8,
+        memory: 16,
+        storage: Storage::SSD(1024),
+    };
+
+    println!("{}", spec.cpus);
+
+    struct Dim2(u32, u32);
+    let d2 = Dim2(10, 20);
+    println!("{}", d2.0);
 }
+
+//fn example06() {
+//}

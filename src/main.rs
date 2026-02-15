@@ -92,6 +92,32 @@ fn example05() {
     struct Dim2(u32, u32);
     let d2 = Dim2(10, 20);
     println!("{}", d2.0);
+
+    let r = &spec;
+    println!("{}", r.cpus);
+    println!("{}", (*r).cpus);
+
+    enum List<T> {
+        Node { data: T, next: Box<List<T>> },
+        Nil,
+    }
+
+    let n1 = List::<u32>::Nil;
+    let n2 = List::<u32>::Node {
+        data: 10,
+        next: Box::<List<u32>>::new(n1),
+    };
+    let n3 = List::Node {
+        data: 40,
+        next: Box::new(n2),
+    };
+
+    fn make_pair<T1, T2>(a: T1, b: T2) -> (T1, T2) {
+        (a, b)
+    }
+
+    make_pair::<u8, bool>(40, false);
+    make_pair(10, true);
 }
 
 //fn example06() {

@@ -8,6 +8,7 @@ fn main() {
     example02();
     example03();
     example04();
+    example05();
 }
 
 fn mul(x: i32, y: i32) -> i32 {
@@ -51,4 +52,27 @@ fn mul2(a: u32, b: u32) -> u32 {
 fn example04() {
     do_it(add, 10, 2);
     do_it(mul2, 10, 2);
+}
+
+fn example05() {
+    enum DoW {
+        Sunday,
+        Monday,
+        Tuesday,
+        Wednesday,
+        Thursday,
+        Friday,
+        Saturday,
+    }
+
+    enum Storage {
+        HDD { size: u32, rpm: u32 },
+        SSD(u32),
+    }
+
+    let hdd = Storage::HDD {
+        size: 512,
+        rpm: 7200,
+    };
+    let ssd = Storage::SSD(512);
 }

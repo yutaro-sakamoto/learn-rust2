@@ -118,6 +118,18 @@ fn example05() {
 
     make_pair::<u8, bool>(40, false);
     make_pair(10, true);
+
+    struct Buffer<const S: usize> {
+        buf: [u8; S],
+    }
+
+    let buf = Buffer::<128> { buf: [0; 128] };
+
+    let n: i32 = 100;
+    let m: i64 = n as i64;
+
+    let s = String::from("abc");
+    let s: String = "abc".into();
 }
 
 //fn example06() {

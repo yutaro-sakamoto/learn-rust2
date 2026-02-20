@@ -130,6 +130,21 @@ fn example05() {
 
     let s = String::from("abc");
     let s: String = "abc".into();
+
+    struct Msg {
+        msg1: &'static str,
+        msg2: &'static str,
+    }
+
+    fn print_msg(msg: &Msg) {
+        println!("{}{}", msg.msg1, msg.msg2);
+    }
+
+    let msg = Msg {
+        msg1: "Hello, ",
+        msg2: "world!",
+    };
+    print_msg(&msg);
 }
 
 //fn example06() {

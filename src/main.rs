@@ -145,6 +145,17 @@ fn example05() {
         msg2: "world!",
     };
     print_msg(&msg);
+
+    fn func(a: u32, b: u32) {
+        let n: u32 = a + b;
+        let m = a + b;
+    }
+    let n = 10;
+    {
+        let m = 200;
+        let r = m + n;
+    }
+    // let p = m + n; // error
 }
 
 //fn example06() {

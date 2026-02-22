@@ -185,6 +185,35 @@ fn example05() {
     } else {
         1
     };
+
+    fn sumup_loop(mut n: u64) -> u64 {
+        let mut total = 0;
+        loop {
+            if n == 0 {
+                break;
+            }
+            total += n;
+            n -= 1;
+        }
+        total
+    }
+
+    fn sumup_while(mut n: u64) -> u64 {
+        let mut total = 0;
+        while n > 0 {
+            total += n;
+            n -= 1;
+        }
+        total
+    }
+
+    fn sumup_for(n: u64) -> u64 {
+        let mut total = 0;
+        for x in 0..=n {
+            total += x;
+        }
+        total
+    }
 }
 
 //fn example06() {

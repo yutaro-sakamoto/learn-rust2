@@ -156,6 +156,35 @@ fn example05() {
         let r = m + n;
     }
     // let p = m + n; // error
+
+    fn maybe_fail() -> Option<u32> {
+        Some(10)
+    }
+
+    let result = maybe_fail();
+    let result = result.unwrap();
+
+    fn sumup(n: u64) -> u64 {
+        if n == 0 { 0 } else { n + sumup(n - 1) }
+    }
+
+    //let b = if n < 0 {
+    //    println!("n is negative");
+    //} else {
+    //    n * n
+    //}
+
+    if n < 0 {
+        println!("n is negative")
+    }
+
+    let b = if n > 0 {
+        n + n
+    } else if n < 0 {
+        n * n
+    } else {
+        1
+    };
 }
 
 //fn example06() {

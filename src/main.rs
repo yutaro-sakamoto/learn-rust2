@@ -214,6 +214,26 @@ fn example05() {
         }
         total
     }
+
+    'main_loop: loop {
+        loop {
+            break 'main_loop;
+        }
+    }
+
+    let v = [3, 8, 11, 15];
+    let mut result = 0;
+    for x in v.iter() {
+        if *x % 2 == 0 {
+            continue;
+        }
+        result += x;
+    }
+
+    match maybe_fail() {
+        Some(n) => println!("{n}"),
+        None => (),
+    }
 }
 
 //fn example06() {

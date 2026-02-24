@@ -234,6 +234,15 @@ fn example05() {
         Some(n) => println!("{n}"),
         None => (),
     }
+
+    if let Some(n) = maybe_fail() {
+        println!("{n}");
+    }
+
+    while let Some(n) = maybe_fail() {
+        println!("{n}");
+        break;
+    }
 }
 
 //fn example06() {

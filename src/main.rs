@@ -243,6 +243,34 @@ fn example05() {
         println!("{n}");
         break;
     }
+
+    fn average(v: &[f32]) -> Option<f32> {
+        if v.is_empty() {
+            return None;
+        }
+        let mut total = 0.0;
+        for n in v {
+            total += n;
+        }
+        Some(total / v.len() as f32)
+    }
+
+    let n: f64 = 1.0;
+    assert!(n >= 0.0);
+    assert!(true);
+    let a = 1;
+    let b = 1;
+    let c = 2;
+    assert_eq!(a, b);
+    assert_ne!(a, c);
+
+    let n = 56;
+    println!("{}", n);
+    println!("{:>04}", n);
+    println!("{:#x}", n);
+    println!("{:#016x}", n);
+    println!("{:#o}", n);
+    println!("{:#b}", n);
 }
 
 //fn example06() {

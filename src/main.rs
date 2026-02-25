@@ -271,6 +271,9 @@ fn example05() {
     println!("{:#016x}", n);
     println!("{:#o}", n);
     println!("{:#b}", n);
+
+    let v = vec![true, false, false];
+    todo!();
 }
 
 //fn example06() {

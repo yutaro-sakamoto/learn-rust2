@@ -273,7 +273,24 @@ fn example05() {
     println!("{:#b}", n);
 
     let v = vec![true, false, false];
-    todo!();
+
+    let f = |a, b| a + b;
+    let n = f(10, 20);
+
+    let mut s = Storage::SSD(512);
+    let mut f = || match &mut s {
+        Storage::HDD { size: s, .. } => *s += 64,
+        _ => (),
+    };
+
+    struct Env_f<'a> {
+        storage: &'a mut Storage,
+    }
+
+    struct closure_f<'a> {
+        ptr_func: fn(),
+        ptr_env: Box<Env_f<'a>>,
+    }
 }
 
 //fn example06() {

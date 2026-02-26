@@ -291,6 +291,13 @@ fn example05() {
         ptr_func: fn(),
         ptr_env: Box<Env_f<'a>>,
     }
+
+    let mut s = Storage::SSD(512);
+    let mut g = move || match &mut s {
+        Storage::HDD { size: s, .. } => *s += 64,
+        _ => (),
+    };
+    g();
 }
 
 //fn example06() {

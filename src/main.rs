@@ -321,6 +321,18 @@ fn example05() {
             }
         }
     }
+
+    impl PCSpec {
+        fn new(cpus: u16, memory: u32, storage: Storage) -> PCSpec {
+            PCSpec {
+                cpus,
+                memory,
+                storage,
+            }
+        }
+    }
+    let s = Storage::SSD(512);
+    let spec = PCSpec::new(8, 32, s);
 }
 
 //fn example06() {

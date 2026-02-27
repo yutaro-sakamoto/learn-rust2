@@ -298,6 +298,29 @@ fn example05() {
         _ => (),
     };
     g();
+
+    fn get_size(s: &Storage) -> u32 {
+        match s {
+            Storage::HDD { size: s, .. } => *s,
+            Storage::SSD(s) => *s,
+        }
+    }
+
+    impl Storage {
+        fn get_size(&self) -> u32 {
+            match self {
+                Storage::HDD { size: s, .. } => *s,
+                Storage::SSD(s) => *s,
+            }
+        }
+
+        fn set_size(&mut self, size: u32) {
+            match self {
+                Storage::HDD { size: s, .. } => *s = size,
+                Storage::SSD(s) => *s = size,
+            }
+        }
+    }
 }
 
 //fn example06() {

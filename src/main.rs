@@ -1,3 +1,6 @@
+use std::collections::BTreeMap;
+use std::collections::LinkedList;
+
 fn main() {
     let x: i32 = 10;
     let y = 20;
@@ -333,6 +336,35 @@ fn example05() {
     }
     let s = Storage::SSD(512);
     let spec = PCSpec::new(8, 32, s);
+
+    let mut list1 = LinkedList::new();
+    list1.push_back(0);
+    list1.push_back(1);
+    list1.push_back(2);
+
+    let mut list2 = LinkedList::new();
+    list2.push_back(100);
+    list2.push_back(200);
+    list2.push_back(300);
+
+    list1.append(&mut list2);
+
+    list1.push_front(-10);
+
+    let mut m = BTreeMap::new();
+
+    m.insert(1, "apple");
+    m.insert(1, "apple");
+    m.insert(2, "orange");
+    m.insert(3, "banana");
+
+    if let Some(old) = m.remove(&2) {
+        println!("{}", old);
+    }
+
+    if let Some(value) = m.get(&3) {
+        println!("{}", value);
+    }
 }
 
 //fn example06() {

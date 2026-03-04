@@ -525,6 +525,28 @@ fn example05() {
     let b = 20;
     let c = a + b;
     let d = a * b;
+
+    let a;
+    {
+        let b = 10;
+        a = &b;
+        println!("{}", a);
+    }
+
+    let a: i32 = 10;
+    let b: &i32 = &b;
+
+    fn square<'a>(x: &'a i32) -> i32 {
+        x * x
+    }
+
+    square(b);
+
+    struct Foo<'a> {
+        x: &'a i32,
+    }
+
+    Foo { x: &a };
 }
 
 //fn example06() {

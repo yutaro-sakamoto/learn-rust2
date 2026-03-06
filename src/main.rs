@@ -558,6 +558,40 @@ fn example05() {
         add(&mut x, &y);
     }
     println!("{x}");
+
+    let a = 10;
+    {
+        let b = &a;
+        let c = &a;
+        let d = b;
+    }
+
+    fn bar(x: &mut i32) {
+        *x += 1;
+    }
+
+    let mut a = 10;
+    let b = &mut a;
+    bar(b);
+    *b += 10;
+
+    struct XY {
+        x: Vec<i32>,
+        y: Vec<i32>,
+    }
+
+    let mut xy = XY {
+        x: vec![1, 2, 3],
+        y: Vec::new(),
+    };
+
+    //for elm in xy.x.iter() {
+    //    y.push(*elem * *elm);
+    //}
+    let XY { x, y } = &mut xy;
+    for elm in x {
+        y.push(*elm * *elm);
+    }
 }
 
 //fn example06() {

@@ -1,6 +1,7 @@
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
+use std::sync::Arc;
 
 fn main() {
     let x: i32 = 10;
@@ -592,6 +593,10 @@ fn example05() {
     for elm in x {
         y.push(*elm * *elm);
     }
+
+    let v = Arc::new(vec![1, 2, 3]);
+    let w = v.clone();
+    let z = v.clone();
 }
 
 //fn example06() {

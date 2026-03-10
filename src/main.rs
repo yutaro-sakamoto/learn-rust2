@@ -2,6 +2,7 @@ use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
 use std::sync::{Arc, Mutex};
+use std::{sync::RwLock, thread::sleep, time::Duration};
 
 fn main() {
     let x: i32 = 10;
@@ -613,6 +614,58 @@ fn example05() {
 
     h1.join().unwrap();
     h2.join().unwrap();
+
+    //run_rw_lock_example();
+}
+
+fn run_rw_lock_example() {
+    let mut gallery = BTreeMap::new();
+    gallery.insert("葛飾北斎", "富嶽三十六景 神奈川沖浪裏");
+    gallery.insert("ミュシャ", "黄道十二宮");
+
+    let gallery = Arc::new(RwLock::new(gallery));
+
+    let mut hdls = Vec::new();
+    for n in 0..3 {
+        let gallery = gallery.clone();
+        let hdl = std::thread::spawn(move || {
+            for _ in 0..8 {
+                {
+                    let guard = gallery.read().unwrap();
+                    if n == 0 {
+                        for (key, value) in guard.iter() {
+                            print!("{key}:{value}, ");
+                        }
+                        println!();
+                    }
+                }
+                sleep(Duration::from_secs(1));
+            }
+        });
+        hdls.push(hdl);
+    }
+
+    let staff = std::thread::spawn(move || {
+        for n in 0..4 {
+            if n % 2 == 0 {
+                let mut guard = gallery.write().unwrap();
+                guard.clear();
+                guard.insert("ゴッホ", "星月夜");
+                guard.insert("エッシャー", "滝");
+            } else {
+                let mut guard = gallery.write().unwrap();
+                guard.clear();
+                guard.insert("葛飾北斎", "富嶽三十六景 神奈川沖浪裏");
+                guard.insert("ミュシャ", "黄道十二宮");
+            }
+            sleep(Duration::from_secs(2));
+        }
+    });
+
+    for hdl in hdls {
+        hdl.join().unwrap();
+    }
+    staff.join();
 }
 
 //fn example06() {

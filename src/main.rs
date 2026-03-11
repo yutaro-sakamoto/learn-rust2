@@ -1,6 +1,7 @@
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
+use std::fmt::{Display, Formatter};
 use std::sync::{Arc, Mutex};
 use std::{sync::RwLock, thread::sleep, time::Duration};
 
@@ -616,6 +617,23 @@ fn example05() {
     h2.join().unwrap();
 
     //run_rw_lock_example();
+
+    struct ImaginaryNumber {
+        real: f64,
+        img: f64,
+    }
+
+    impl Display for ImaginaryNumber {
+        fn fmt(&self, f: &mut Formatter) -> Result<(), std::fmt::Error> {
+            write!(f, "{} + {}i", self.real, self.img)
+        }
+    }
+
+    let n = ImaginaryNumber {
+        real: 3.0,
+        img: 4.0,
+    };
+    println!("{n}");
 }
 
 fn run_rw_lock_example() {

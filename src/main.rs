@@ -2,6 +2,7 @@ use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
 use std::fmt::{Display, Formatter};
+use std::iter::Iterator;
 use std::sync::{Arc, Mutex};
 use std::{sync::RwLock, thread::sleep, time::Duration};
 
@@ -634,6 +635,47 @@ fn example05() {
         img: 4.0,
     };
     println!("{n}");
+
+    #[derive(Debug, Clone)]
+    enum MyList<T> {
+        Node { data: T, next: Box<MyList<T>> },
+        Nil,
+    }
+
+    impl<T> MyList<T> {
+        fn new() -> MyList<T> {
+            MyList::Nil
+        }
+
+        fn cons(self, data: T) -> MyList<T> {
+            MyList::Node {
+                data,
+                next: Box::new(self),
+            }
+        }
+
+        fn iter<'a>(&'a self) -> ListIter<'a, T> {
+            ListIter { elm: self }
+        }
+    }
+
+    struct ListIter<'a, T> {
+        elm: &'a MyList<T>,
+    }
+
+    impl<'a, T> Iterator for ListIter<'a, T> {
+        type Item = &'a T;
+
+        fn next(&mut self) -> Option<Self::Item> {
+            match self.elm {
+                MyList::Node { data, next } => {
+                    self.elm = next;
+                    Some(data)
+                }
+                MyList::Nil => None,
+            }
+        }
+    }
 }
 
 fn run_rw_lock_example() {

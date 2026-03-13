@@ -1,3 +1,4 @@
+use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
@@ -636,7 +637,7 @@ fn example05() {
     };
     println!("{n}");
 
-    #[derive(Debug, Clone)]
+    #[derive(Debug, Clone, Serialize, Deserialize)]
     enum MyList<T> {
         Node { data: T, next: Box<MyList<T>> },
         Nil,
@@ -676,6 +677,10 @@ fn example05() {
             }
         }
     }
+    let list = MyList::new().cons(1).cons(2).cons(3);
+
+    let js = serde_json::to_string(&list).unwrap();
+    println!("JSON* {} bytes", js.len());
 }
 
 fn run_rw_lock_example() {

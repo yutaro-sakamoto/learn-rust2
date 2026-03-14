@@ -681,6 +681,23 @@ fn example05() {
 
     let js = serde_json::to_string(&list).unwrap();
     println!("JSON* {} bytes", js.len());
+    println!("{js}");
+
+    let yml = serde_yaml::to_string(&list).unwrap();
+    println!("YAML: {} bytes", yml.len());
+    println!("{yml}");
+
+    let msgpack = rmp_serde::to_vec(&list).unwrap();
+    println!("MessagePack: {} bytes", msgpack.len());
+
+    let list = serde_json::from_str::<MyList<i32>>(&js).unwrap();
+    println!("{:?}", list);
+
+    let list = serde_yaml::from_str::<MyList<i32>>(&js).unwrap();
+    println!("{:?}", list);
+
+    let list = rmp_serde::from_slice::<MyList<i32>>(&msgpack).unwrap();
+    println!("{:?}", list);
 }
 
 fn run_rw_lock_example() {

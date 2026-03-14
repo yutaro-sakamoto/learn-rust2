@@ -5,6 +5,7 @@ use std::collections::LinkedList;
 use std::fmt::{Display, Formatter};
 use std::iter::Iterator;
 use std::sync::{Arc, Mutex};
+use std::{fs::File, io::prelude::*, path::Path};
 use std::{sync::RwLock, thread::sleep, time::Duration};
 
 fn main() {
@@ -698,6 +699,12 @@ fn example05() {
 
     let list = rmp_serde::from_slice::<MyList<i32>>(&msgpack).unwrap();
     println!("{:?}", list);
+
+    let yml = serde_yaml::to_string(&list).unwrap();
+
+    let path = Path::new("test.yml");
+    let mut f = File::create(path).unwrap();
+    f.write_all(yml.as_bytes()).unwrap();
 }
 
 fn run_rw_lock_example() {

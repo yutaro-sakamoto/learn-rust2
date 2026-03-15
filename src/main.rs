@@ -694,8 +694,8 @@ fn example05() {
     let list = serde_json::from_str::<MyList<i32>>(&js).unwrap();
     println!("{:?}", list);
 
-    let list = serde_yaml::from_str::<MyList<i32>>(&js).unwrap();
-    println!("{:?}", list);
+    //let list = serde_yaml::from_str::<MyList<i32>>(&js).unwrap();
+    //println!("{:?}", list);
 
     let list = rmp_serde::from_slice::<MyList<i32>>(&msgpack).unwrap();
     println!("{:?}", list);
@@ -705,6 +705,14 @@ fn example05() {
     let path = Path::new("test.yml");
     let mut f = File::create(path).unwrap();
     f.write_all(yml.as_bytes()).unwrap();
+
+    let path = Path::new("test.yml");
+    let mut f = File::open(path).unwrap();
+    let mut yml = String::new();
+    f.read_to_string(&mut yml).unwrap();
+
+    let list = serde_yaml::from_str::<MyList<i32>>(&yml).unwrap();
+    println!("{:?}", list);
 }
 
 fn run_rw_lock_example() {

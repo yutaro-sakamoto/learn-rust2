@@ -4,7 +4,9 @@ use std::collections::BTreeSet;
 use std::collections::LinkedList;
 use std::fmt::{Display, Formatter};
 use std::iter::Iterator;
+use std::ops::Mul;
 use std::sync::{Arc, Mutex};
+use std::thread;
 use std::{fs::File, io::prelude::*, path::Path};
 use std::{sync::RwLock, thread::sleep, time::Duration};
 
@@ -713,6 +715,18 @@ fn example05() {
 
     let list = serde_yaml::from_str::<MyList<i32>>(&yml).unwrap();
     println!("{:?}", list);
+
+    fn square2<T>(x: T) -> T
+    where
+        T: Mul<Output = T> + Copy,
+    {
+        x * x
+    }
+
+    let n = Arc::new(10);
+    thread::spawn(move || {
+        println!("{n}");
+    });
 }
 
 fn run_rw_lock_example() {

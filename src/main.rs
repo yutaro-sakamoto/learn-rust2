@@ -727,6 +727,47 @@ fn example05() {
     thread::spawn(move || {
         println!("{n}");
     });
+
+    //let n = Arc::new(Mutex::new(Rc::new(10)));
+    //thread::spawn(move || {
+    //    let n = n.lock().unwrap();
+    //    println!("{n}");
+    //});
+
+    trait Foo2 {
+        fn foo(&self);
+    }
+
+    struct Bar;
+    impl Foo2 for Bar {
+        fn foo(&self) {
+            println!("Bar::foo");
+        }
+    }
+
+    struct Buzz;
+    impl Foo2 for Buzz {
+        fn foo(&self) {
+            println!("Buzz::foo");
+        }
+    }
+
+    fn call_foo_static<T: Foo2>(arg: &T) {
+        arg.foo();
+    }
+
+    fn call_foo_dynamic(arg: &dyn Foo2) {
+        arg.foo();
+    }
+
+    let bar = Bar;
+    let buzz = Buzz;
+
+    call_foo_static(&bar);
+    call_foo_static(&buzz);
+
+    call_foo_dynamic(&bar);
+    call_foo_dynamic(&buzz);
 }
 
 fn run_rw_lock_example() {

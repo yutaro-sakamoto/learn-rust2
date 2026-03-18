@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
+use std::error::Error;
 use std::fmt::{Display, Formatter};
 use std::iter::Iterator;
 use std::ops::Mul;
@@ -768,6 +769,26 @@ fn example05() {
 
     call_foo_dynamic(&bar);
     call_foo_dynamic(&buzz);
+
+    #[derive(Debug)]
+    struct ErrorA;
+
+    impl Display for ErrorA {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "ErrorA")
+        }
+    }
+
+    impl Error for ErrorA {}
+
+    #[derive(Debug)]
+    struct ErrorB;
+
+    impl Display for ErrorB {
+        fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+            write!(f, "Error B")
+        }
+    }
 }
 
 fn run_rw_lock_example() {

@@ -790,12 +790,20 @@ fn example05() {
         }
     }
 
+    impl Error for ErrorB {}
+
     fn error_a() -> Result<(), ErrorA> {
         Err(ErrorA)
     }
 
     fn error_b() -> Result<(), ErrorB> {
         Err(ErrorB)
+    }
+
+    fn error_ab() -> Result<(), Box<dyn std::error::Error>> {
+        error_a()?;
+        //error_b()?;
+        Ok(())
     }
 }
 

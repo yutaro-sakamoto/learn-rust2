@@ -789,6 +789,14 @@ fn example05() {
             write!(f, "Error B")
         }
     }
+
+    fn error_a() -> Result<(), ErrorA> {
+        Err(ErrorA)
+    }
+
+    fn error_b() -> Result<(), ErrorB> {
+        Err(ErrorB)
+    }
 }
 
 fn run_rw_lock_example() {

@@ -805,6 +805,21 @@ fn example05() {
         //error_b()?;
         Ok(())
     }
+
+    trait Location {
+        fn address(&self) -> &str;
+    }
+
+    trait Person {
+        fn name(&self) -> &str;
+    }
+
+    trait House: Location + Person {}
+
+    fn print_house_info(house: &dyn House) {
+        println!("所有者: {}", house.name());
+        println!("住所: {}", house.address())
+    }
 }
 
 fn run_rw_lock_example() {

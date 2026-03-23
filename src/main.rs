@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::any::{Any, TypeId};
 use std::collections::BTreeMap;
 use std::collections::BTreeSet;
 use std::collections::LinkedList;
@@ -783,14 +784,13 @@ fn example05() {
 
     #[derive(Debug)]
     struct ErrorB;
+    impl Error for ErrorB {}
 
     impl Display for ErrorB {
         fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
             write!(f, "Error B")
         }
     }
-
-    impl Error for ErrorB {}
 
     fn error_a() -> Result<(), ErrorA> {
         Err(ErrorA)
@@ -820,6 +820,52 @@ fn example05() {
         println!("所有者: {}", house.name());
         println!("住所: {}", house.address())
     }
+
+    struct MyHouse {
+        owner: String,
+        address: String,
+    }
+
+    impl Location for MyHouse {
+        fn address(&self) -> &str {
+            &self.address
+        }
+    }
+
+    impl Person for MyHouse {
+        fn name(&self) -> &str {
+            &self.owner
+        }
+    }
+
+    impl House for MyHouse {}
+
+    let my_house = MyHouse {
+        owner: "かぐや姫".to_string(),
+        address: "ムーンベース 3丁目1番地".to_string(),
+    };
+
+    print_house_info(&my_house);
+
+    fn closure() -> impl Fn(i32) -> i32 {
+        |x| x * x
+    }
+
+    let f = closure();
+    f(10);
+
+    let f = |x: i32| x * x;
+    let g = |x: i32| x * x;
+
+    fn get_type_id<T: Any>(_: &T) -> TypeId {
+        TypeId::of::<T>()
+    }
+
+    println!("{}", get_type_id(&f) == get_type_id(&g));
+
+    //fn error_ab_impl(flag: bool) -> impl std::error::Error {
+    //    if flag { ErrorA } else { ErrorB }
+    //}
 }
 
 fn run_rw_lock_example() {

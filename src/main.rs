@@ -12,6 +12,9 @@ use std::thread;
 use std::{fs::File, io::prelude::*, path::Path};
 use std::{sync::RwLock, thread::sleep, time::Duration};
 
+mod a;
+//mod b;
+
 fn main() {
     let x: i32 = 10;
     let y = 20;
@@ -867,29 +870,6 @@ fn example05() {
     //    if flag { ErrorA } else { ErrorB }
     //}
 }
-
-mod a {
-    struct TypeA;
-    mod a_1 {
-        struct TypeA1;
-    }
-
-    mod a_2 {
-        struct TypeA2;
-    }
-}
-
-mod b {
-    struct TypeB;
-    mod b_1 {
-        struct TypeB1;
-    }
-
-    mod b_2 {
-        struct TypeB2;
-    }
-}
-
 fn run_rw_lock_example() {
     let mut gallery = BTreeMap::new();
     gallery.insert("葛飾北斎", "富嶽三十六景 神奈川沖浪裏");

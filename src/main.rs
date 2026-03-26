@@ -869,6 +869,43 @@ fn example05() {
     //fn error_ab_impl(flag: bool) -> impl std::error::Error {
     //    if flag { ErrorA } else { ErrorB }
     //}
+
+    mod a {
+        //a1: a_1::TypeA1,
+        struct TypeA {
+            a2: Box<a_2::TypeA2>,
+        }
+
+        mod a_1 {
+            struct TypeA1 {
+                a: Box<super::TypeA>,
+                a2: Box<super::a_2::TypeA2>,
+            }
+        }
+        mod a_2 {
+            pub struct TypeA2 {
+                a: Box<super::TypeA>,
+                //a1: super::a_1::TypeA1;
+            }
+        }
+    }
+
+    mod b {
+        pub struct TypeB;
+        mod b_1 {
+            pub struct TypeB1;
+        }
+        pub mod b_2 {
+            pub struct TypeB2;
+        }
+    }
+
+    fn scope() {
+        let b = b::TypeB;
+        //let a = a::TypeA;
+        //let b1 = b::b_1::TypeB1;
+        let b2 = b::b_2::TypeB2;
+    }
 }
 fn run_rw_lock_example() {
     let mut gallery = BTreeMap::new();

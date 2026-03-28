@@ -938,6 +938,17 @@ fn example05() {
             }
         }
     }
+
+    mod c {
+        mod c_1_outer {
+            pub mod c_1_inner {
+                pub(crate) struct TypeC1;
+                pub(super) struct TypeC2;
+                pub(in crate::c::c_1_outer) struct TypeC3;
+                pub(self) struct TypeC4;
+            }
+        }
+    }
 }
 fn run_rw_lock_example() {
     let mut gallery = BTreeMap::new();

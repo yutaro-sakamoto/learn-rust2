@@ -944,9 +944,19 @@ fn example05() {
             pub mod c_1_inner {
                 pub(crate) struct TypeC1;
                 pub(super) struct TypeC2;
-                pub(in crate::c::c_1_outer) struct TypeC3;
+                ///pub(in crate::c::c_1_outer) struct TypeC3;
                 pub(self) struct TypeC4;
             }
+
+            fn f() {
+                let p1 = c_1_inner::TypeC1;
+                let p2 = c_1_inner::TypeC2;
+                //let p3 = c_1_inner::TypeC3;
+            }
+        }
+
+        fn g() {
+            let p1 = c_1_outer::c_1_inner::TypeC1;
         }
     }
 }

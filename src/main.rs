@@ -959,6 +959,16 @@ fn example05() {
             let p1 = c_1_outer::c_1_inner::TypeC1;
         }
     }
+
+    mod d {
+        pub struct TypeD;
+    }
+
+    mod e {
+        pub use crate::d::TypeD;
+    }
+
+    let e = e::TypeD;
 }
 fn run_rw_lock_example() {
     let mut gallery = BTreeMap::new();

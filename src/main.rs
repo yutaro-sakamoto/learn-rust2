@@ -964,11 +964,11 @@ fn example05() {
         pub struct TypeD;
     }
 
-    mod e {
-        pub use crate::d::TypeD;
-    }
+    //mod e {
+    //    pub use super::d::TypeD;
+    //}
 
-    let e = e::TypeD;
+    //let e = e::TypeD;
 }
 fn run_rw_lock_example() {
     let mut gallery = BTreeMap::new();

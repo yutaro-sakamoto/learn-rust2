@@ -44,3 +44,13 @@ impl Display for ParseError {
 }
 
 impl Error for ParseError {}
+
+fn parse_escape(pos: usize, c: char) -> Result<AST, ParseError> {
+    match c {
+        '\\' | '(' | ')' | '|' | '+' | '*' | '?' => Ok(AST::Char(c)),
+        _ => {
+            let err = ParseError::InvalidEscape(pos, c);
+            Err(err)
+        }
+    }
+}
